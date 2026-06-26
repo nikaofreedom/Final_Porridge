@@ -2,7 +2,7 @@
 
 > "喂我复习资料，还你一碗热乎的备考精华。"
 
-**期末粥** 是 [WorkBuddy](https://www.codebuddy.cn) 的智能考试备考助手 Skill。把课件、笔记、教材甚至上课录音丢进来，自动提取考试重点、构建知识体系图谱、按实际考试题型分类训练、生成贴合真实考试的模拟卷，最终输出排版精美的 PDF 备考文件 + 量身定制的学习方案。
+**期末粥** 是一个通用的 AI Agent Skill，适用于任何支持 Markdown 格式 Skill/Agent 指令的 AI 编程助手（如 WorkBuddy、Trae、Cursor、Claude Code、GitHub Copilot 等）。把课件、笔记、教材甚至上课录音丢进来，自动提取考试重点、构建知识体系图谱、按实际考试题型分类训练、生成贴合真实考试的模拟卷，最终输出排版精美的 PDF 备考文件 + 量身定制的学习方案。
 
 ---
 
@@ -98,17 +98,32 @@
 
 ## 安装方式
 
-### WorkBuddy 用户
+### 方式一：下载 zip 导入
 
 1. 从 [Releases](../../releases) 下载最新 `期末粥.zip`
-2. 在 WorkBuddy 中打开 **技能** → **导入** → 选择 zip 文件
-3. 说「期末粥」或「帮我备考」即可激活
+2. 导入到你的 AI Agent 工具中（WorkBuddy 技能导入 / Trae Skill 导入 / Cursor Rules 导入等）
 
-### 手动安装
+### 方式二：git clone
 
 ```bash
-git clone https://github.com/YOUR_USERNAME/期末粥.git ~/.workbuddy/skills/期末粥
+# 克隆到你的 AI 编程助手的 Skills/Rules 目录，例如：
+# WorkBuddy:   ~/.workbuddy/skills/
+# Trae:        ~/.trae/skills/
+# Cursor:      .cursor/rules/
+# Claude Code: ~/.claude/skills/
+
+git clone https://github.com/YOUR_USERNAME/期末粥.git 你的Skills目录/期末粥
 ```
+
+### 兼容性
+
+| 工具 | 支持方式 |
+|------|---------|
+| WorkBuddy | 原生 Skill 格式，直接导入 zip 或放 `~/.workbuddy/skills/` |
+| Trae | 放 `~/.trae/skills/` 目录，.trae.md 规则兼容 |
+| Cursor | 放 `.cursor/rules/` 目录，作为 Project Rules 使用 |
+| Claude Code | 放 `~/.claude/skills/` 或通过 CLAUDE.md 引用 |
+| GitHub Copilot | 放 `.github/copilot-instructions.md` 或作为自定义指令 |
 
 ---
 
@@ -118,7 +133,6 @@ git clone https://github.com/YOUR_USERNAME/期末粥.git ~/.workbuddy/skills/期
   ```bash
   pip install python-pptx python-docx reportlab
   ```
-- **WorkBuddy** 桌面应用
 - 可选：`ffmpeg`（视频音频提取）、`openai-whisper`（本地语音转文字）
 
 ---
@@ -127,7 +141,7 @@ git clone https://github.com/YOUR_USERNAME/期末粥.git ~/.workbuddy/skills/期
 
 ```
 期末粥/
-├── SKILL.md                          # Skill 定义与工作流（大脑）
+├── SKILL.md                          # Skill 定义与工作流（核心指令）
 ├── README.md                         # 本文件
 ├── references/
 │   └── knowledge_base_template.md    # 知识库结构与格式参考
@@ -145,9 +159,3 @@ git clone https://github.com/YOUR_USERNAME/期末粥.git ~/.workbuddy/skills/期
 ## 开源协议
 
 MIT
-
----
-
-## 致谢
-
-基于 [WorkBuddy](https://www.codebuddy.cn) 平台构建。
